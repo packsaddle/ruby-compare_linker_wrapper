@@ -1,4 +1,4 @@
-require "compare_linker/wrapper/version"
+require 'compare_linker/wrapper/version'
 
 module CompareLinker
   module Wrapper
