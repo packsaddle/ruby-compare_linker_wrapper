@@ -14,6 +14,18 @@ module CompareLinker
         puts "CompareLinker::Wrapper version #{::CompareLinker::Wrapper::VERSION}"
       end
 
+      desc 'compare', 'compare gemfile.lock'
+      option :debug, type: :boolean, default: false
+      option :verbose, type: :boolean, default: false
+
+      def compare(*args)
+        setup_logger(options)
+      rescue StandardError => e
+        suggest_messages(options)
+        raise e
+      end
+      default_command :compare
+
       no_commands do
         def logger
           ::CompareLinker::Wrapper.logger
