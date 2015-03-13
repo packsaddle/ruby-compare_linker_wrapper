@@ -1,3 +1,5 @@
+require 'logger'
+
 require 'compare_linker/wrapper/version'
 
 module CompareLinker
@@ -5,7 +7,7 @@ module CompareLinker
     ISSUE_URL = 'https://github.com/packsaddle/ruby-compare_linker-wrapper/issues/new'
     def self.default_logger
       logger = Logger.new(STDERR)
-      logger.progname = 'CompareLinker::Wrapper'
+      logger.progname = "CompareLinker::Wrapper/#{VERSION}"
       logger.level = Logger::WARN
       logger
     end
