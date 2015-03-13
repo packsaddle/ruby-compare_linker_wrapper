@@ -30,6 +30,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'thor'
+  spec.add_runtime_dependency 'git'
+  spec.add_runtime_dependency 'bundler'
+  spec.add_runtime_dependency 'octokit'
+  spec.add_runtime_dependency 'compare_linker'
 
   spec.add_development_dependency 'bundler', '~> 1.8'
   spec.add_development_dependency 'rake', '~> 10.0'

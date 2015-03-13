@@ -1,4 +1,8 @@
 require 'logger'
+require 'git'
+require 'bundler'
+require 'octokit'
+require 'compare_linker'
 
 require 'compare_linker/wrapper/version'
 
