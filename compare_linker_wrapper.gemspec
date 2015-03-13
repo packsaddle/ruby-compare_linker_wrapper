@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'compare_linker/wrapper/version'
+require 'compare_linker_wrapper/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'compare_linker-wrapper'
-  spec.version       = CompareLinker::Wrapper::VERSION
+  spec.name          = 'compare_linker_wrapper'
+  spec.version       = CompareLinkerWrapper::VERSION
   spec.authors       = ['sanemat']
   spec.email         = ['o.gata.ken@gmail.com']
 

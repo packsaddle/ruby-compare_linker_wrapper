@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'compare_linker/wrapper'
-require 'compare_linker/wrapper/cli'
-CompareLinker::Wrapper::CLI.start(ARGV)
+require 'compare_linker_wrapper'
+require 'compare_linker_wrapper/cli'
+CompareLinkerWrapper::CLI.start(ARGV)

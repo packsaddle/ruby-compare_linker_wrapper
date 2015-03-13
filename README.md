@@ -1,14 +1,14 @@
-# CompareLinker::Wrapper
+# CompareLinkerWrapper
 
-[![Gem Version](http://img.shields.io/gem/v/compare_linker-wrapper.svg?style=flat)](http://badge.fury.io/rb/compare_linker-wrapper)
-[![Build Status](http://img.shields.io/travis/packsaddle/ruby-compare_linker-wrapper/master.svg?style=flat)](https://travis-ci.org/packsaddle/ruby-compare_linker-wrapper)
+[![Gem Version](http://img.shields.io/gem/v/compare_linker_wrapper.svg?style=flat)](http://badge.fury.io/rb/compare_linker_wrapper)
+[![Build Status](http://img.shields.io/travis/packsaddle/ruby-compare_linker_wrapper/master.svg?style=flat)](https://travis-ci.org/packsaddle/ruby-compare_linker_wrapper)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'compare_linker-wrapper'
+gem 'compare_linker_wrapper'
 ```
 
 And then execute:
@@ -17,7 +17,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install compare_linker-wrapper
+    $ gem install compare_linker_wrapper
 
 ## Development
 
@@ -27,7 +27,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-1. Fork it ( https://github.com/packsaddle/ruby-compare_linker-wrapper/fork )
+1. Fork it ( https://github.com/packsaddle/ruby-compare_linker_wrapper/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

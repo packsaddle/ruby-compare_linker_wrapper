@@ -1,10 +1,10 @@
 require_relative 'helper'
 
-module CompareLinker
+module CompareLinkerWrapper
   class TestWrapper < Test::Unit::TestCase
     test 'version' do
       assert do
-        !::CompareLinker::Wrapper::VERSION.nil?
+        !::CompareLinkerWrapper::VERSION.nil?
       end
     end
   end

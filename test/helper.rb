@@ -1,4 +1,4 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'test/unit'
 
-require 'compare_linker/wrapper'
+require 'compare_linker_wrapper'
