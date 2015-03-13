@@ -20,6 +20,13 @@ module CompareLinker
 
       def compare(*args)
         setup_logger(options)
+        gemfile_locks = [
+          'Gemfile.lock'
+        ]
+        params = {
+          base: args[0],
+          head: 'HEAD'
+        }
       rescue StandardError => e
         suggest_messages(options)
         raise e
