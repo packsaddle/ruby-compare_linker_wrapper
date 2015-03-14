@@ -19,6 +19,31 @@ Or install it yourself as:
 
     $ gem install compare_linker_wrapper
 
+## Usage
+
+```
+git diff --name-only origin/master \
+ | grep ".*[gG]emfile.lock$" || RETURN_CODE=$?
+
+case "$RETURN_CODE" in
+ "" ) echo "found" ;;
+ "1" )
+   echo "not found"
+   exit 0 ;;
+ * )
+   echo "Error"
+   exit $RETURN_CODE ;;
+esac
+
+git diff --name-only origin/master \
+ | grep ".*[gG]emfile.lock$" \
+ | compare-linker-wrapper origin/master \
+ | text-to-checkstyle \
+ | saddler report \
+    --require saddler/reporter/github \
+    --reporter Saddler::Reporter::Github::PullRequestComment
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment. Run `bundle exec compare_linker_wrapper` to use the code located in this directory, ignoring other installed copies of this gem.
