@@ -21,13 +21,13 @@ module CompareLinkerWrapper
 
     def compare(*args)
       setup_logger(options)
-      gemfile_locks = args[1..-1]
+      gemfile_locks = args
       params = {
-        base: options[:base] || args[0],
+        base: options[:base],
         head: options[:head]
       }
-      puts gemfile_locks
-      puts params
+      params[:base] = gemfile_locks.shift unless options[:base]
+
       access_token = ENV['OCTOKIT_ACCESS_TOKEN'] || ENV['GITHUB_ACCESS_TOKEN']
       octokit ||= ::Octokit::Client.new(access_token: access_token)
       formatter = ::CompareLinker::Formatter::Text.new
