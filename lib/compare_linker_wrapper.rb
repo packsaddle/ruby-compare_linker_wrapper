@@ -6,6 +6,7 @@ require 'compare_linker'
 
 require 'compare_linker_wrapper/error'
 require 'compare_linker_wrapper/formatter'
+require 'compare_linker_wrapper/linker'
 require 'compare_linker_wrapper/version'
 
 module CompareLinkerWrapper
