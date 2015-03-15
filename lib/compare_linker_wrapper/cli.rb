@@ -40,7 +40,7 @@ module CompareLinkerWrapper
         params[:base] = args.shift
         params[:file] = args
       end
-      puts Linker.new.link(params)
+      puts Linker.new('.').link(params)
     rescue StandardError => e
       suggest_messages(options)
       raise e
