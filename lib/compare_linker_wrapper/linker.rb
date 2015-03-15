@@ -1,5 +1,11 @@
 module CompareLinkerWrapper
   class Linker
+    attr_accessor :git_path, :git_options
+    def initialize(git_path, git_options = {})
+      @git_path = git_path
+      @git_options = git_options
+    end
+
     def access_token
       ENV['OCTOKIT_ACCESS_TOKEN'] || ENV['GITHUB_ACCESS_TOKEN']
     end
@@ -8,8 +14,8 @@ module CompareLinkerWrapper
       @client ||= ::Octokit::Client.new(access_token: access_token)
     end
 
-    def git(path, options = {})
-      @git ||= Git.open(path, options)
+    def git
+      @git ||= Git.open(@git_path, @git_options)
     end
 
     def link(params)
@@ -33,7 +39,7 @@ module CompareLinkerWrapper
               gem_info[:repo_owner] = finder.repo_owner
               gem_info[:repo_name] = finder.repo_name
 
-              tag_finder = ::CompareLinker::GithubTagFinder.new(octokit)
+              tag_finder = ::CompareLinker::GithubTagFinder.new(client)
               old_tag = tag_finder.find(finder.repo_full_name, gem_info[:old_ver])
               new_tag = tag_finder.find(finder.repo_full_name, gem_info[:new_ver])
 
@@ -60,6 +66,14 @@ module CompareLinkerWrapper
       logger.info('use formatter')
       logger.info(formatter)
       formatter
+    end
+
+    def logger
+      ::CompareLinkerWrapper.logger
+    end
+
+    def parse(lock_file)
+      Bundler::LockfileParser.new(lock_file)
     end
   end
 end

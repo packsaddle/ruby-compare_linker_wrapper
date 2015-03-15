@@ -37,7 +37,7 @@ esac
 
 git diff --name-only origin/master \
  | grep ".*[gG]emfile.lock$" \
- | xargs compare-linker-wrapper origin/master \
+ | xargs compare-linker-wrapper --base origin/master \
     --formatter CompareLinker::Formatter::Text \
  | text-to-checkstyle \
  | saddler report \
