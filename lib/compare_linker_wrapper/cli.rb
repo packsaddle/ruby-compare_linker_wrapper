@@ -19,6 +19,7 @@ module CompareLinkerWrapper
     option :base, type: :string, default: 'origin/master'
     option :head, type: :string, default: 'HEAD'
     option :file, type: :array
+    option :formatter, type: :string, default: 'CompareLinker::Formatter::Text'
 
     def compare(*args)
       setup_logger(options)
@@ -41,7 +42,8 @@ module CompareLinkerWrapper
 
       access_token = ENV['OCTOKIT_ACCESS_TOKEN'] || ENV['GITHUB_ACCESS_TOKEN']
       octokit ||= ::Octokit::Client.new(access_token: access_token)
-      formatter = ::CompareLinker::Formatter::Text.new
+      formatter = add_formatter(options)
+
       git = Git.open('.')
       gemfile_locks.each do |gemfile_lock|
         old_lockfile = parse(git.show(params[:base], gemfile_lock))
@@ -112,6 +114,14 @@ module CompareLinkerWrapper
       # http://stackoverflow.com/a/23955971/104080
       def method_missing(method, *args)
         self.class.start([self.class.default_command, method.to_s] + args)
+      end
+
+      def add_formatter(options)
+        formatter = Formatter.add_formatter(options[:formatter]) if options[:formatter]
+        fail NoFormatterError unless formatter
+        logger.info('use formatter')
+        logger.info(formatter)
+        formatter
       end
     end
 end
