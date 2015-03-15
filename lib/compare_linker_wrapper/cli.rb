@@ -25,19 +25,12 @@ module CompareLinkerWrapper
       setup_logger(options)
       params = {
         head: options[:head],
+        base: options[:base],
         formatter: options[:formatter]
       }
-      if options[:file] && options[:base]
-        params[:base] = options[:base]
+      if options[:file]
         params[:file] = options[:file]
-      elsif options[:file]
-        params[:base] = args[0]
-        params[:file] = options[:file]
-      elsif options[:base]
-        params[:base] = options[:base]
-        params[:file] = args
       else
-        params[:base] = args.shift
         params[:file] = args
       end
       puts Linker.new('.').link(params)
@@ -48,10 +41,6 @@ module CompareLinkerWrapper
     default_command :compare
 
     no_commands do
-      def parse(lock_file)
-        Bundler::LockfileParser.new(lock_file)
-      end
-
       def logger
         ::CompareLinkerWrapper.logger
       end

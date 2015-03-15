@@ -39,7 +39,7 @@ module CompareLinkerWrapper
               gem_info[:repo_owner] = finder.repo_owner
               gem_info[:repo_name] = finder.repo_name
 
-              tag_finder = ::CompareLinker::GithubTagFinder.new(octokit)
+              tag_finder = ::CompareLinker::GithubTagFinder.new(client)
               old_tag = tag_finder.find(finder.repo_full_name, gem_info[:old_ver])
               new_tag = tag_finder.find(finder.repo_full_name, gem_info[:new_ver])
 
@@ -70,6 +70,10 @@ module CompareLinkerWrapper
 
     def logger
       ::CompareLinkerWrapper.logger
+    end
+
+    def parse(lock_file)
+      Bundler::LockfileParser.new(lock_file)
     end
   end
 end
