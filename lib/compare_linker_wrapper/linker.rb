@@ -14,6 +14,7 @@ module CompareLinkerWrapper
 
     def link(params)
       formatter = add_formatter(params[:formatter])
+      comments = []
 
       params[:file].each do |gemfile_lock|
         old_lockfile = parse(git.show(params[:base], gemfile_lock))
@@ -48,8 +49,9 @@ module CompareLinkerWrapper
             formatter.format(gem_info)
           end
         end
-        compare_links
+        comments << compare_links
       end
+      comments
     end
 
     def add_formatter(formatter_class)
