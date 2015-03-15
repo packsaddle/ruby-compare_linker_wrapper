@@ -1,7 +1,7 @@
 module CompareLinkerWrapper
   class Linker
     attr_accessor :git_path, :git_options
-    def initialize(git_path, git_options = {})
+    def initialize(git_path = '.', git_options = {})
       @git_path = git_path
       @git_options = git_options
     end
