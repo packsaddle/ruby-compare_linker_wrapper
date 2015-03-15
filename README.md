@@ -21,6 +21,22 @@ Or install it yourself as:
 
 ## Usage
 
+```text
+compare-linker-wrapper 'example/Gemfile.lock' \
+  --base origin/master \
+  --formatter CompareLinker::Formatter::Markdown
+
+* [octokit](https://github.com/octokit/octokit.rb): 3.8.0 => 3.8.1
+
+compare-linker-wrapper 'example/Gemfile.lock' \
+  --base origin/master \
+  --formatter CompareLinker::Formatter::Text
+
+octokit: https://github.com/octokit/octokit.rb 3.8.0 => 3.8.1
+```
+
+## Useful Usage on CI
+
 ```
 git diff --name-only origin/master \
  | grep ".*[gG]emfile.lock$" || RETURN_CODE=$?
@@ -38,7 +54,7 @@ esac
 git diff --name-only origin/master \
  | grep ".*[gG]emfile.lock$" \
  | xargs compare-linker-wrapper --base origin/master \
-    --formatter CompareLinker::Formatter::Text \
+    --formatter CompareLinker::Formatter::Markdown \
  | text-to-checkstyle \
  | saddler report \
     --require saddler/reporter/github \
