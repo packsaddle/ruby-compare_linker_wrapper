@@ -18,15 +18,26 @@ module CompareLinkerWrapper
     option :verbose, type: :boolean, default: false
     option :base, type: :string, default: 'origin/master'
     option :head, type: :string, default: 'HEAD'
+    option :file, type: :array
 
     def compare(*args)
       setup_logger(options)
-      gemfile_locks = args
       params = {
-        base: options[:base],
         head: options[:head]
       }
-      params[:base] = gemfile_locks.shift unless options[:base]
+      if options[:file] && options[:base]
+        params[:base] = options[:base]
+        params[:file] = options[:file]
+      elsif options[:file]
+        params[:base] = args[0]
+        params[:file] = options[:file]
+      elsif options[:base]
+        params[:base] = options[:base]
+        params[:file] = args
+      else
+        params[:base] = args.shift
+        params[:file] = args
+      end
 
       access_token = ENV['OCTOKIT_ACCESS_TOKEN'] || ENV['GITHUB_ACCESS_TOKEN']
       octokit ||= ::Octokit::Client.new(access_token: access_token)
