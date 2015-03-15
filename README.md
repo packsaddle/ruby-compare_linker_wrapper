@@ -61,6 +61,31 @@ git diff --name-only origin/master \
     --reporter Saddler::Reporter::Github::PullRequestComment
 ```
 
+## Command
+
+```text
+Commands:
+  compare-linker-wrapper compare         # compare gemfile.lock
+  compare-linker-wrapper help [COMMAND]  # Describe available commands or one specific command
+  compare-linker-wrapper version         # Show the CompareLinkerWrapper version
+
+Usage:
+  compare-linker-wrapper compare
+
+Options:
+  [--debug], [--no-debug]
+  [--verbose], [--no-verbose]
+  [--base=BASE]
+                               # Default: origin/master
+  [--head=HEAD]
+                               # Default: HEAD
+  [--file=one two three]
+  [--formatter=FORMATTER]
+                               # Default: CompareLinker::Formatter::Text
+
+compare gemfile.lock
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment. Run `bundle exec compare_linker_wrapper` to use the code located in this directory, ignoring other installed copies of this gem.
