@@ -66,5 +66,5 @@ module CompareLinkerWrapper
         self.class.start([self.class.default_command, method.to_s] + args)
       end
     end
-end
+  end
 end
