@@ -30,13 +30,12 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'thor'
-  spec.add_runtime_dependency 'git'
-  spec.add_runtime_dependency 'bundler'
-  spec.add_runtime_dependency 'octokit'
-  spec.add_runtime_dependency 'compare_linker'
+  spec.add_runtime_dependency 'thor', '>= 0'
+  spec.add_runtime_dependency 'git', '>= 0'
+  spec.add_runtime_dependency 'bundler', '>= 0'
+  spec.add_runtime_dependency 'octokit', '>= 0'
+  spec.add_runtime_dependency 'compare_linker', '>= 0'
 
-  spec.add_development_dependency 'bundler', '~> 1.8'
   spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'test-unit'
+  spec.add_development_dependency 'test-unit', '>= 0'
 end
