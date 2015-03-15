@@ -1,6 +1,6 @@
 module CompareLinkerWrapper
   module Formatter
-    def self.add_formatter(formatter_type, output = nil)
+    def self.add_formatter(formatter_type, _output = nil)
       formatter = custom_formatter_class(formatter_type)
       formatter.new
     end
