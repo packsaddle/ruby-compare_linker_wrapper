@@ -1,12 +1,21 @@
 module CompareLinkerWrapper
   class Linker
-    def link(params)
-      access_token = ENV['OCTOKIT_ACCESS_TOKEN'] || ENV['GITHUB_ACCESS_TOKEN']
-      octokit ||= ::Octokit::Client.new(access_token: access_token)
-      formatter = add_formatter(options)
+    def access_token
+      ENV['OCTOKIT_ACCESS_TOKEN'] || ENV['GITHUB_ACCESS_TOKEN']
+    end
 
-      git = Git.open('.')
-      gemfile_locks.each do |gemfile_lock|
+    def client
+      @client ||= ::Octokit::Client.new(access_token: access_token)
+    end
+
+    def git(path, options = {})
+      @git ||= Git.open(path, options)
+    end
+
+    def link(params)
+      formatter = add_formatter(params[:formatter])
+
+      params[:file].each do |gemfile_lock|
         old_lockfile = parse(git.show(params[:base], gemfile_lock))
         new_lockfile = parse(git.show(params[:head], gemfile_lock))
 
@@ -14,7 +23,7 @@ module CompareLinkerWrapper
         comparator.compare(old_lockfile, new_lockfile)
         compare_links = comparator.updated_gems.map do |gem_name, gem_info|
           if gem_info[:owner].nil?
-            finder = ::CompareLinker::GithubLinkFinder.new(octokit)
+            finder = ::CompareLinker::GithubLinkFinder.new(client)
             finder.find(gem_name)
             if finder.repo_owner.nil?
               gem_info[:homepage_uri] = finder.homepage_uri
@@ -39,11 +48,12 @@ module CompareLinkerWrapper
             formatter.format(gem_info)
           end
         end
-        puts compare_links
+        compare_links
       end
     end
-    def add_formatter(options)
-      formatter = Formatter.add_formatter(options[:formatter]) if options[:formatter]
+
+    def add_formatter(formatter_class)
+      formatter = Formatter.add_formatter(formatter_class) if formatter_class
       fail NoFormatterError unless formatter
       logger.info('use formatter')
       logger.info(formatter)
