@@ -13,6 +13,7 @@ Gem::Specification.new do |spec|
   spec.description   = 'CompareLinker CLI wrapper.'
   spec.homepage      = 'https://github.com/packsaddle/ruby-compare_linker_wrapper'
   spec.license       = 'MIT'
+  spec.required_ruby_version = '>= 2.1'
 
   spec.files         = \
     `git ls-files -z`
