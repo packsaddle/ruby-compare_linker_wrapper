@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'git', '>= 0'
   spec.add_runtime_dependency 'bundler', '>= 0'
   spec.add_runtime_dependency 'octokit', '>= 0'
-  spec.add_runtime_dependency 'compare_linker', '>= 0'
+  spec.add_runtime_dependency 'compare_linker', '< 1.3.0'
 
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'test-unit', '>= 0'
